@@ -34,6 +34,22 @@ class GildedRoseTest(unittest.TestCase):
             assert item.quality == former_quality - 1
             assert item.sell_in == former_sell_in - 1
 
+    def test_update_quality_should_increase_item_quality_when_it_is_aged_brie(self):
+        items = [
+            Item(name="Aged Brie", sell_in=12, quality=13),
+            Item(name="foo", sell_in=14, quality=4),
+            Item(name="Aged Brie", sell_in=2, quality=45),
+        ]
+        aged_bries = [item for item in items if item.name == "Aged Brie"]
+        initial_aged_bries_qualities = [aged_brie.quality for aged_brie in aged_bries]
+        gilded_rose = GildedRose(items)
+
+        gilded_rose.update_quality()
+
+        for i, aged_brie in enumerate(aged_bries):
+            former_quality = initial_aged_bries_qualities[i]
+            assert aged_brie.quality == former_quality + 1
+
 
 if __name__ == "__main__":
     unittest.main()
