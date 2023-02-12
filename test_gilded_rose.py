@@ -30,6 +30,18 @@ class GildedRoseTest(unittest.TestCase):
             former_quality = initial_qualities[i]
             assert item.quality == former_quality - 1
 
+    def test_item_quality_never_becomes_negative(self):
+        items = [
+            Item(name="foo", sell_in=3, quality=0),
+            Item(name="bar", sell_in=-14, quality=0),
+        ]
+        gilded_rose = GildedRose(items)
+
+        gilded_rose.update_quality()
+
+        for item in items:
+            assert item.quality == 0
+
     def test_update_quality_should_increase_item_quality_when_it_is_aged_brie(self):
         items = [
             Item(name="Aged Brie", sell_in=12, quality=13),
