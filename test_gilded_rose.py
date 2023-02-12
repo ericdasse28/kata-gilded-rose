@@ -28,7 +28,6 @@ class GildedRoseTest(unittest.TestCase):
 
         for i, item in enumerate(normal_items):
             former_quality = initial_qualities[i]
-
             assert item.quality == former_quality - 1
 
     def test_update_quality_should_increase_item_quality_when_it_is_aged_brie(self):
@@ -64,6 +63,23 @@ class GildedRoseTest(unittest.TestCase):
             if item.name != "Sulfuras, Hand of Ragnaros":
                 former_sell_in = former_sell_ins[i]
                 assert item.sell_in == former_sell_in - 1
+
+    def test_update_quality_should_decrease_normal_item_quality_twice_as_fast_when_sell_by_has_passed(
+        self,
+    ):
+        normal_items = [
+            Item(name="foo", sell_in=0, quality=13),
+            Item(name="bar", sell_in=-14, quality=4),
+            Item(name="foobar", sell_in=-2, quality=45),
+        ]
+        gilded_rose = GildedRose(normal_items)
+        initial_qualities = [item.quality for item in normal_items]
+
+        gilded_rose.update_quality()
+
+        for i, item in enumerate(normal_items):
+            former_quality = initial_qualities[i]
+            assert item.quality == former_quality - 2
 
 
 if __name__ == "__main__":
