@@ -201,6 +201,25 @@ class GildedRoseTest(unittest.TestCase):
             former_quality = former_qualities[i]
             assert item.quality == former_quality + 3
 
+    def test_backstage_passes_quality_drops_to_0_after_concert(self):
+        backstage_passes_items = [
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=13
+            ),
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=-1, quality=4
+            ),
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=-15, quality=4
+            ),
+        ]
+        gilded_rose = GildedRose(backstage_passes_items)
+
+        gilded_rose.update_quality()
+
+        for i, item in enumerate(backstage_passes_items):
+            assert item.quality == 0
+
 
 if __name__ == "__main__":
     unittest.main()
