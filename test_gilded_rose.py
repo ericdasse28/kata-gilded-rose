@@ -103,6 +103,21 @@ class GildedRoseTest(unittest.TestCase):
                 former_sell_in = former_sell_ins[i]
                 assert item.sell_in == former_sell_in - 1
 
+    def test_update_quality_never_decreases_sulfura_items_sell_in(self):
+        sulfura_items = [
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=3, quality=5),
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=13, quality=5),
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=4, quality=5),
+        ]
+        former_sell_ins = [item.quality for item in sulfura_items]
+        gilded_rose = GildedRose(sulfura_items)
+
+        gilded_rose.update_quality()
+
+        for i, item in enumerate(sulfura_items):
+            former_sell_in = former_sell_ins[i]
+            assert item.quality == former_sell_in
+
     def test_update_quality_should_decrease_normal_item_quality_twice_as_fast_when_sell_by_has_passed(
         self,
     ):
