@@ -58,6 +58,18 @@ class GildedRoseTest(unittest.TestCase):
             former_quality = initial_aged_bries_qualities[i]
             assert aged_brie.quality == former_quality + 1
 
+    def test_item_quality_is_never_above_50(self):
+        items = [
+            Item(name="Aged Brie", sell_in=12, quality=50),
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=2, quality=50),
+        ]
+        gilded_rose = GildedRose(items)
+
+        gilded_rose.update_quality()
+
+        for item in items:
+            assert item.quality == 50
+
     def test_update_quality_decrease_sell_in_for_items_other_than_sulfuras(self):
         items = [
             Item(name="foo", sell_in=12, quality=13),
