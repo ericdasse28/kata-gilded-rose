@@ -70,6 +70,21 @@ class GildedRoseTest(unittest.TestCase):
         for item in items:
             assert item.quality == 50
 
+    def test_sulfuras_items_quality_never_drops(self):
+        sulfura_items = [
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=3, quality=5),
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=3, quality=15),
+            Item(name="Sulfuras, Hand of Ragnaros", sell_in=3, quality=45),
+        ]
+        former_qualities = [item.quality for item in sulfura_items]
+        gilded_rose = GildedRose(sulfura_items)
+
+        gilded_rose.update_quality()
+
+        for i, item in enumerate(sulfura_items):
+            former_quality = former_qualities[i]
+            assert item.quality == former_quality
+
     def test_update_quality_decrease_sell_in_for_items_other_than_sulfuras(self):
         items = [
             Item(name="foo", sell_in=12, quality=13),
