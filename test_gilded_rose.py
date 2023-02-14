@@ -140,6 +140,29 @@ class GildedRoseTest(unittest.TestCase):
             former_quality = former_qualities[i]
             assert item.quality == former_quality + 1
 
+    def test_backstage_passes_quality_increase_by_2_when_there_are_between_6_and_10_sell_in_days(
+        self,
+    ):
+        backstage_passes_items = [
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=13
+            ),
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=7, quality=4
+            ),
+            Item(
+                name="Backstage passes to a TAFKAL80ETC concert", sell_in=6, quality=4
+            ),
+        ]
+        former_qualities = [item.quality for item in backstage_passes_items]
+        gilded_rose = GildedRose(backstage_passes_items)
+
+        gilded_rose.update_quality()
+
+        for i, item in enumerate(backstage_passes_items):
+            former_quality = former_qualities[i]
+            assert item.quality == former_quality + 2
+
 
 if __name__ == "__main__":
     unittest.main()
