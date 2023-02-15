@@ -7,6 +7,7 @@ from strategies.backstage_passes_update_strategy import (
     BackstagePassesItemUpdateStrategy,
 )
 from strategies.common_item_update_strategy import CommonItemUpdateStrategy
+from strategies.conjured_item_update_strategy import ConjuredItemUpdateStrategy
 from strategies.legendary_item_update_strategy import LegendaryItemUpdateStrategy
 
 
@@ -17,6 +18,7 @@ class GildedRose(object):
             "Aged Brie": AgedBrieItemUpdateStrategy(),
             "Backstage passes": BackstagePassesItemUpdateStrategy(),
             "Legendary": LegendaryItemUpdateStrategy(),
+            "Conjured": ConjuredItemUpdateStrategy(),
             "Common": CommonItemUpdateStrategy(),
         }
         self._item_updater = ItemUpdater(
