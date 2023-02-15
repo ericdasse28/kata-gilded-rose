@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from gilded_rose import Item
+from gilded_rose.gilded_rose import Item
 
 
 class ItemUpdateStategy(metaclass=ABCMeta):

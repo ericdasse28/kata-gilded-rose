@@ -1,4 +1,4 @@
-from gilded_rose import Item
+from gilded_rose.gilded_rose import Item
 from item_update_strategy import ItemUpdateStategy
 
 
