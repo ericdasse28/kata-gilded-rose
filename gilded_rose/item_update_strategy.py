@@ -6,5 +6,5 @@ class ItemUpdateStategy(metaclass=ABCMeta):
     MAX_QUALITY = 50
 
     @abstractmethod
-    def update_quality(item):
+    def update_quality(self, item):
         pass
