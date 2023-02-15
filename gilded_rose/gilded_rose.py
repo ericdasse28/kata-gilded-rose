@@ -32,6 +32,7 @@ class GildedRose(object):
                 "Backstage passes"
             ],
             "Sulfuras, Hand of Ragnaros": self._strategies["Legendary"],
+            "Conjured Mana Cake": self._strategies["Conjured"],
         }
 
         for item in self.items:
