@@ -294,6 +294,42 @@ class TestAgedBrieItems:
         assert actual_quality == 50
 
 
+class TestSulfuraItems:
+    @pytest.mark.parametrize("initial_sell_in", [6, 7, 8, 0, -2])
+    def test_sell_in_never_changes(self, initial_sell_in):
+        gilded_rose = GildedRose(
+            [
+                Item(
+                    name="Sulfuras, Hand of Ragnaros",
+                    sell_in=initial_sell_in,
+                    quality=2,
+                )
+            ]
+        )
+
+        gilded_rose.update_quality()
+
+        actual_sell_in = gilded_rose.items[0].sell_in
+        assert actual_sell_in == initial_sell_in
+
+    @pytest.mark.parametrize("initial_quality", [8, 7, 6, 9, 2, 49])
+    def test_quality_never_changes(self, initial_quality):
+        gilded_rose = GildedRose(
+            [
+                Item(
+                    name="Sulfuras, Hand of Ragnaros",
+                    sell_in=7,
+                    quality=initial_quality,
+                )
+            ]
+        )
+
+        gilded_rose.update_quality()
+
+        actual_quality = gilded_rose.items[0].quality
+        assert actual_quality == initial_quality
+
+
 class TestConjuredItems:
     @pytest.mark.parametrize("initial_sell_in", [6, 7, 8, 0, -2])
     def test_sell_in_should_decrease(self, initial_sell_in):
