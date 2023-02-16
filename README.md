@@ -1,3 +1,6 @@
+[![CI](https://github.com/ericdasse28/kata-gilded-rose/actions/workflows/python-app.yml/badge.svg)](https://github.com/ericdasse28/kata-gilded-rose/actions/workflows/python-app.yml)
+[![Coverage Status](https://coveralls.io/repos/github/ericdasse28/kata-gilded-rose/badge.svg?branch=master)](https://coveralls.io/github/ericdasse28/kata-gilded-rose?branch=master)
+
 # Kata Gilded Rose
 Implementation of the Gilded Rose refactoring kata
 
