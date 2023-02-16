@@ -78,6 +78,22 @@ class TestAgedBrieItems:
         actual_quality = gilded_rose.items[0].quality
         assert actual_quality == initial_quality + 1
 
+    @pytest.mark.parametrize(
+        "sell_in, initial_quality",
+        [(0, 8), (-1, 17), (-3, 18), (-5, 9), (-2, 34), (-18, 48)],
+    )
+    def test_quality_should_increase_twice_as_fast_after_update_when_sell_in_has_passed(
+        self, sell_in, initial_quality
+    ):
+        gilded_rose = GildedRose(
+            [Item(name="Aged Brie", sell_in=sell_in, quality=initial_quality)]
+        )
+
+        gilded_rose.update_quality()
+
+        actual_quality = gilded_rose.items[0].quality
+        assert actual_quality == initial_quality + 2
+
     def test_quality_is_never_above_50(self):
         gilded_rose = GildedRose([Item(name="Aged Brie", sell_in=7, quality=50)])
 
