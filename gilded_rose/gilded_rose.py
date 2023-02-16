@@ -26,7 +26,7 @@ class GildedRose(object):
         )
 
     def update_quality(self):
-        strategy_by_item_names = {
+        strategy_book = {
             "Aged Brie": self._strategies["Aged Brie"],
             "Backstage passes to a TAFKAL80ETC concert": self._strategies[
                 "Backstage passes"
@@ -36,7 +36,7 @@ class GildedRose(object):
         }
 
         for item in self.items:
-            self._item_updater.item_update_strategy = strategy_by_item_names.get(
+            self._item_updater.item_update_strategy = strategy_book.get(
                 item.name, self._strategies["Common"]
             )
 
