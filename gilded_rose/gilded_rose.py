@@ -25,7 +25,19 @@ class GildedRose(object):
             item_update_strategy=self._strategies["Common"]
         )
 
-    def update_quality(self):
+    def get_strategy(self, item):
+        """Given an item, select the strategy to apply to update its quality
+
+        Parameters
+        ----------
+        item: Item
+            Item whose quality should be updated
+
+        Returns
+        -------
+        strategy: ItemUpdateStrategy
+            Strategy to update the quality of the item
+        """
         strategy_book = {
             "Aged Brie": self._strategies["Aged Brie"],
             "Backstage passes to a TAFKAL80ETC concert": self._strategies[
@@ -35,10 +47,13 @@ class GildedRose(object):
             "Conjured Mana Cake": self._strategies["Conjured"],
         }
 
+        return strategy_book.get(item.name, self._strategies["Common"])
+
+    def update_quality(self):
+        """Update the quality of all the Gilded Rose items"""
+
         for item in self.items:
-            self._item_updater.item_update_strategy = strategy_book.get(
-                item.name, self._strategies["Common"]
-            )
+            self._item_updater.item_update_strategy = self.get_strategy(item)
 
             item = self._item_updater.update_quality(item)
 
